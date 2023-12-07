@@ -4,13 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t bpavlov/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t bnpavlov/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true bpavlov/react-test npm test
 
 after_success:
-  - docker build -t bpavlov/multi-client ./client
-  - docker build -t bpavlov/multi-nginx ./nginx
-  - docker build -t bpavlov/multi-server ./server
-  - docker build -t bpavlov/multi-worker ./worker
+  - docker build -t bnpavlov/multi-client ./client
+  - docker build -t bnpavlov/multi-nginx ./nginx
+  - docker build -t bnpavlov/multi-server ./server
+  - docker build -t bnpavlov/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWOWRD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push bnpavlov/multi-client
+  - docker push bnpavlov/multi-nginx
+  - docker push bnpavlov/multi-server
+  = docker push bnpavlov/multi-worker
