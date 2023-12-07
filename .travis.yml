@@ -4,6 +4,7 @@ services:
   - docker
 
 before_install:
+  - ls
   - docker build -t bnpavlov/react-test -f ./client/Dockerfile.dev ./client
 
 script:
