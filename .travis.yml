@@ -20,4 +20,4 @@ after_success:
   - docker push bnpavlov/multi-client
   - docker push bnpavlov/multi-nginx
   - docker push bnpavlov/multi-server
-  = docker push bnpavlov/multi-worker
+  - docker push bnpavlov/multi-worker
